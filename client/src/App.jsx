@@ -164,11 +164,11 @@ function App() {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-gray-200 p-6 md:p-10 font-sans">
       <Toaster position="top-right" reverseOrder={false} />
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12">
-        <h1 className="text-3xl md:text-5xl font-bold text-indigo-400 mb-4 md:mb-0">Wishlist - {username}</h1>
-        <button className="bg-red-700 hover:bg-red-800 transition px-5 py-2 rounded-lg shadow-md w-full md:w-auto" onClick={logout}>Logout</button>
+        <button className="bg-[#752626] hover:bg-red-800 transition px-5 py-1 rounded-lg shadow-md w-full md:w-auto" onClick={logout}>Logout</button>
+        <h1 className="text-3xl md:text-5xl font-bold text-indigo-400 mt-6 md:mb-0">Wishlist - {username}</h1>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 mb-8">
+      <div className="max-w-2xl mx-auto flex flex-col sm:flex-row gap-3 mb-8">
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -177,7 +177,7 @@ function App() {
         />
         <button
           onClick={editMode ? updateWish : addWish}
-          className="bg-indigo-600 hover:bg-indigo-700 transition px-6 py-3 rounded-lg shadow-md font-medium"
+          className="bg-indigo-600 hover:bg-indigo-700 transition px-6 py-2 rounded-lg shadow-md font-medium"
         >
           {editMode ? "Update" : "Add"}
         </button>
@@ -198,10 +198,28 @@ function App() {
             {wishes.filter(w => !w.completed).map((wish, index) => (
               <li key={wish._id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gray-800 p-4 rounded-xl shadow-lg hover:shadow-2xl transition">
                 <span className="text-gray-200 font-medium">{index+1}. {wish.title}</span>
-                <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
-                  <button onClick={() => startEdit(wish)} className="px-3 py-1 bg-yellow-500 hover:bg-yellow-600 rounded-lg transition font-medium">Edit</button>
-                  <button onClick={() => deleteWish(wish._id)} className="px-3 py-1 bg-red-700 hover:bg-red-800 rounded-lg text-white transition font-medium">Delete</button>
-                  <button onClick={() => completeWish(wish._id)} className="px-3 py-1 bg-green-700 hover:bg-green-800 rounded-lg text-white transition font-medium">Complete</button>
+                <div className="flex flex-wrap sm:flex-nowrap gap-2 mt-2 sm:mt-0">
+                  <button
+                    onClick={() => startEdit(wish)}
+                    className="px-4 py-1 min-w-[70px] bg-[#a16901] hover:bg-yellow-600 rounded-lg transition font-medium truncate"
+                    title="Edit"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => deleteWish(wish._id)}
+                    className="px-4 py-1 min-w-[70px] bg-[#752626] hover:bg-red-800 rounded-lg text-white transition font-medium truncate"
+                    title="Delete"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => completeWish(wish._id)}
+                    className="px-4 py-1 min-w-[70px] bg-[#195319] hover:bg-green-800 rounded-lg text-white transition font-medium truncate"
+                    title="Complete"
+                  >
+                    Complete
+                  </button>
                 </div>
               </li>
             ))}
@@ -215,7 +233,7 @@ function App() {
             {wishes.filter(w => w.completed).map((wish, index) => (
               <li key={wish._id} className="flex justify-between items-center bg-gray-700 p-4 rounded-xl shadow-md">
                 <span className="line-through text-gray-400 font-medium">{index+1}. {wish.title}</span>
-                <button onClick={() => deleteWish(wish._id)} className="px-3 py-1 bg-red-700 hover:bg-red-800 rounded-lg text-white transition font-medium">Delete</button>
+                <button onClick={() => deleteWish(wish._id)} className="px-3 py-1 bg-[#752626] hover:bg-red-800 rounded-lg text-white transition font-medium">Delete</button>
               </li>
             ))}
             {wishes.filter(w => w.completed).length === 0 && <p className="text-gray-400">No completed wishes yet.</p>}
